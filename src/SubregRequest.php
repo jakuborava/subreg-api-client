@@ -15,23 +15,23 @@ class SubregRequest
     public function login(): string
     {
         $params = [
-            "data" => [
-                "login" => config('subreg-api-client.user'),
-                "password" => config('subreg-api-client.password')
-            ]
+            'data' => [
+                'login' => config('subreg-api-client.user'),
+                'password' => config('subreg-api-client.password'),
+            ],
         ];
 
         try {
             $response = (new self())->call('Login', $params);
-        } catch (LoginFailedException | RequestFailedException | SoapFault $e) {
+        } catch (LoginFailedException|RequestFailedException|SoapFault $e) {
             throw new LoginFailedException(
-                'It was not possible to login to Subreg API. Exception: ' . $e->getMessage()
+                'It was not possible to login to Subreg API. Exception: '.$e->getMessage()
             );
         }
 
-        if (!isset($response['data']['ssid'])) {
+        if (! isset($response['data']['ssid'])) {
             throw new LoginFailedException(
-                'It was not possible to login to Subreg API. Response: ' . json_encode($response)
+                'It was not possible to login to Subreg API. Response: '.json_encode($response)
             );
         }
 
@@ -56,20 +56,20 @@ class SubregRequest
             );
         } catch (SoapFault $e) {
             throw new RequestFailedException(
-                'SOAP request failed. WSDL URI cannot be loaded! Exception: ' . $e->getMessage()
+                'SOAP request failed. WSDL URI cannot be loaded! Exception: '.$e->getMessage()
             );
         }
 
         try {
             $response = $client->__soapCall($command, $params);
         } catch (SoapFault $e) {
-            throw new RequestFailedException('SOAP request call failed. Exception: ' . $e->getMessage());
+            throw new RequestFailedException('SOAP request call failed. Exception: '.$e->getMessage());
         }
 
         if ($response['status'] === 'error') {
             throw new RequestFailedException(
                 sprintf(
-                    "%s. Code (major): %s, code (minor): %s, Response: %s",
+                    '%s. Code (major): %s, code (minor): %s, Response: %s',
                     $response['error']['errormsg'],
                     $response['error']['errorcode']['major'],
                     $response['error']['errorcode']['minor'],

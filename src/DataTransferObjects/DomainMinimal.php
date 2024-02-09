@@ -18,7 +18,7 @@ class DomainMinimal
         return new DomainMinimal(
             $responseData['name'],
             Carbon::parse($responseData['expire']),
-            (bool)$responseData['autorenew']
+            (bool) $responseData['autorenew']
         );
     }
 }

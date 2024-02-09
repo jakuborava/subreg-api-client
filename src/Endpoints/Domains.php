@@ -2,20 +2,21 @@
 
 namespace Jakuborava\SubregApiClient\Endpoints;
 
+use Illuminate\Support\Collection;
 use Jakuborava\SubregApiClient\DataTransferObjects\Domain;
 use Jakuborava\SubregApiClient\DataTransferObjects\DomainMinimal;
 use Jakuborava\SubregApiClient\Exceptions\LoginFailedException;
 use Jakuborava\SubregApiClient\Exceptions\RequestFailedException;
 use Jakuborava\SubregApiClient\Responses\DomainCheckResponse;
 use Jakuborava\SubregApiClient\SubregRequest;
-use Illuminate\Support\Collection;
 
 class Domains
 {
     /**
+     * @return Collection<DomainMinimal>
+     *
      * @throws LoginFailedException
      * @throws RequestFailedException
-     * @return Collection<DomainMinimal>
      */
     public function list(): Collection
     {
@@ -34,15 +35,14 @@ class Domains
     {
         $params = [
             'data' => [
-                'domain' => $domain
-            ]
+                'domain' => $domain,
+            ],
         ];
 
         $response = (new SubregRequest())->call('Info_Domain', $params);
 
         return Domain::fromSubregAPIResponse($response['data']);
     }
-
 
     /**
      * @throws LoginFailedException
@@ -52,8 +52,8 @@ class Domains
     {
         $params = [
             'data' => [
-                'domain' => $domain
-            ]
+                'domain' => $domain,
+            ],
         ];
 
         $response = (new SubregRequest())->call('Check_Domain', $params);
@@ -62,7 +62,8 @@ class Domains
     }
 
     /**
-     * @param array $params Any other parameters, see https://subreg.cz/manual/?cmd=TLD_Valid&tld=YOUR_TLD
+     * @param  array  $params  Any other parameters, see https://subreg.cz/manual/?cmd=TLD_Valid&tld=YOUR_TLD
+     *
      * @throws LoginFailedException
      * @throws RequestFailedException
      */
@@ -78,8 +79,8 @@ class Domains
                     'ns2.gransy.com',
                     'ns3.gransy.com',
                     'ns4.gransy.com',
-                    'ns5.gransy.com'
-                ]
+                    'ns5.gransy.com',
+                ],
 
             ],
         ];

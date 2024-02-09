@@ -2,11 +2,11 @@
 
 namespace Jakuborava\SubregApiClient\Endpoints;
 
+use Illuminate\Support\Collection;
 use Jakuborava\SubregApiClient\DataTransferObjects\DNSRecord;
 use Jakuborava\SubregApiClient\Exceptions\LoginFailedException;
 use Jakuborava\SubregApiClient\Exceptions\RequestFailedException;
 use Jakuborava\SubregApiClient\SubregRequest;
-use Illuminate\Support\Collection;
 
 class DNS
 {
@@ -43,12 +43,13 @@ class DNS
                     'type' => $type,
                     'content' => $content,
                     'ttl' => $ttl,
-                    'prio' => $priority
-                ]
-            ]
+                    'prio' => $priority,
+                ],
+            ],
         ];
 
         $response = (new SubregRequest())->call('Add_DNS_Record', $params);
+
         return $response['data']['record_id'];
     }
 
@@ -72,9 +73,9 @@ class DNS
                     'type' => $type,
                     'content' => $content,
                     'ttl' => $ttl,
-                    'prio' => $priority
-                ]
-            ]
+                    'prio' => $priority,
+                ],
+            ],
         ];
 
         (new SubregRequest())->call('Modify_DNS_Record', $params);
@@ -90,9 +91,9 @@ class DNS
             'data' => [
                 'domain' => $domain,
                 'record' => [
-                    'id' => $id
-                ]
-            ]
+                    'id' => $id,
+                ],
+            ],
         ];
 
         (new SubregRequest())->call('Delete_DNS_Record', $params);
@@ -107,8 +108,8 @@ class DNS
         $params = [
             'data' => [
                 'domain' => $domain,
-                'template' => $template
-            ]
+                'template' => $template,
+            ],
         ];
 
         (new SubregRequest())->call('Add_DNS_Zone', $params);
