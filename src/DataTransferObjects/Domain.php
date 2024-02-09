@@ -25,24 +25,24 @@ class Domain extends DomainMinimal
         parent::__construct($domain, $expireDate, $autoRenew);
     }
 
-    public static function fromSubregAPIResponse(array $responseData): Domain
+    public static function fromSubregAPIResponse(array $data): Domain
     {
-        //dd($responseData);
+        //dd($data);
         return new Domain(
-            $responseData['domain'],
-            $responseData['contacts'],
-            $responseData['hosts'],
-            $responseData['delegated_hosts'] ?? [],
-            $responseData['registrant'],
-            ! blank($responseData['crDate']) ? Carbon::parse($responseData['crDate']) : null,
-            ! blank($responseData['trDate']) ? Carbon::parse($responseData['trDate']) : null,
-            ! blank($responseData['upDate']) ? Carbon::parse($responseData['upDate']) : null,
-            Carbon::parse($responseData['exDate']),
-            $responseData['authid'],
-            $responseData['status'],
-            (bool) $responseData['autorenew'],
-            (bool) $responseData['premium'],
-            (int) $responseData['price']
+            $data['domain'],
+            $data['contacts'],
+            $data['hosts'],
+            $data['delegated_hosts'] ?? [],
+            $data['registrant'],
+            !blank($data['crDate']) ? Carbon::parse($data['crDate']) : null,
+            !blank($data['trDate']) ? Carbon::parse($data['trDate']) : null,
+            !blank($data['upDate']) ? Carbon::parse($data['upDate']) : null,
+            Carbon::parse($data['exDate']),
+            $data['authid'],
+            $data['status'],
+            (bool)$data['autorenew'],
+            (bool)$data['premium'],
+            (int)$data['price']
         );
     }
 }

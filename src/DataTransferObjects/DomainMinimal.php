@@ -3,8 +3,9 @@
 namespace Jakuborava\SubregApiClient\DataTransferObjects;
 
 use Carbon\Carbon;
+use Jakuborava\SubregApiClient\Contracts\DTO;
 
-class DomainMinimal
+class DomainMinimal implements DTO
 {
     protected function __construct(
         public readonly string $name,
@@ -13,12 +14,12 @@ class DomainMinimal
     ) {
     }
 
-    public static function fromSubregAPIResponse(array $responseData): DomainMinimal
+    public static function fromSubregAPIResponse(array $data): DomainMinimal
     {
         return new DomainMinimal(
-            $responseData['name'],
-            Carbon::parse($responseData['expire']),
-            (bool) $responseData['autorenew']
+            $data['name'],
+            Carbon::parse($data['expire']),
+            (bool)$data['autorenew']
         );
     }
 }

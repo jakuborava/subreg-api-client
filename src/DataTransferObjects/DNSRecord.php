@@ -2,7 +2,9 @@
 
 namespace Jakuborava\SubregApiClient\DataTransferObjects;
 
-class DNSRecord
+use Jakuborava\SubregApiClient\Contracts\DTO;
+
+class DNSRecord implements DTO
 {
     public function __construct(
         public readonly int $id,
@@ -14,15 +16,15 @@ class DNSRecord
     ) {
     }
 
-    public static function fromSubregAPIResponse(array $responseData): DNSRecord
+    public static function fromSubregAPIResponse(array $data): DNSRecord
     {
         return new DNSRecord(
-            $responseData['id'],
-            $responseData['name'],
-            $responseData['type'],
-            $responseData['content'],
-            $responseData['prio'],
-            $responseData['ttl']
+            $data['id'],
+            $data['name'],
+            $data['type'],
+            $data['content'],
+            $data['prio'],
+            $data['ttl']
         );
     }
 }

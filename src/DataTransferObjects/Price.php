@@ -2,7 +2,9 @@
 
 namespace Jakuborava\SubregApiClient\DataTransferObjects;
 
-class Price
+use Jakuborava\SubregApiClient\Contracts\DTO;
+
+class Price implements DTO
 {
     public function __construct(
         public readonly float $amount,
@@ -11,8 +13,8 @@ class Price
     ) {
     }
 
-    public static function fromSubregAPIResponse(array $priceData): Price
+    public static function fromSubregAPIResponse(array $data): Price
     {
-        return new Price($priceData['amount'], $priceData['premium'], $priceData['currency']);
+        return new Price($data['amount'], $data['premium'], $data['currency']);
     }
 }

@@ -36,8 +36,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Jakuborava\\SubregApiClient\\": "src/",
-            "Jakuborava\\SubregApiClient\\Database\\Factories\\": "database/factories/"
+            "Jakuborava\\SubregApiClient\\": "src/"
         }
     },
     "autoload-dev": {
