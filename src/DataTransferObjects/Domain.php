@@ -34,15 +34,15 @@ class Domain extends DomainMinimal
             $data['hosts'],
             $data['delegated_hosts'] ?? [],
             $data['registrant'],
-            !blank($data['crDate']) ? Carbon::parse($data['crDate']) : null,
-            !blank($data['trDate']) ? Carbon::parse($data['trDate']) : null,
-            !blank($data['upDate']) ? Carbon::parse($data['upDate']) : null,
+            ! blank($data['crDate']) ? Carbon::parse($data['crDate']) : null,
+            ! blank($data['trDate']) ? Carbon::parse($data['trDate']) : null,
+            ! blank($data['upDate']) ? Carbon::parse($data['upDate']) : null,
             Carbon::parse($data['exDate']),
             $data['authid'],
             $data['status'],
-            (bool)$data['autorenew'],
-            (bool)$data['premium'],
-            (int)$data['price']
+            (bool) $data['autorenew'],
+            (bool) $data['premium'],
+            (int) $data['price']
         );
     }
 }

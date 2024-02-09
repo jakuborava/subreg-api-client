@@ -19,7 +19,7 @@ class DomainMinimal implements DTO
         return new DomainMinimal(
             $data['name'],
             Carbon::parse($data['expire']),
-            (bool)$data['autorenew']
+            (bool) $data['autorenew']
         );
     }
 }
