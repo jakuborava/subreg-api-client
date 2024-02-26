@@ -91,16 +91,18 @@ class Domains
     }
 
     /**
+     * @param array $params Any other parameters, see https://subreg.cz/manual/?cmd=TLD_Valid&tld=YOUR_TLD
+     *
      * @throws LoginFailedException
      * @throws RequestFailedException
      */
-    public function renew(string $domain, int $period = 1): int
+    public function renew(string $domain, int $period = 1, array $params = []): int
     {
-        $params = [
-            'period' => $period,
+        $body = [
+            'period' => $period, 'params' => $params
         ];
 
-        return (new Orders())->make($domain, 'Renew_Domain', $params);
+        return (new Orders())->make($domain, 'Renew_Domain', $body);
     }
 
     /**
@@ -109,7 +111,7 @@ class Domains
      */
     public function expiringIn(int $days): Collection
     {
-        return collect($this->list())
+        return $this->list()
             ->filter(fn (DomainMinimal $domain) => $domain->expire->diffInDays(now()) <= $days)
             ->sort(function (DomainMinimal $a, DomainMinimal $b) {
                 if ($a->expire->eq($b->expire)) {
