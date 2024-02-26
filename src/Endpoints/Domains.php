@@ -91,7 +91,7 @@ class Domains
     }
 
     /**
-     * @param array $params Any other parameters, see https://subreg.cz/manual/?cmd=TLD_Valid&tld=YOUR_TLD
+     * @param  array  $params  Any other parameters, see https://subreg.cz/manual/?cmd=TLD_Valid&tld=YOUR_TLD
      *
      * @throws LoginFailedException
      * @throws RequestFailedException
@@ -99,7 +99,7 @@ class Domains
     public function renew(string $domain, int $period = 1, array $params = []): int
     {
         $body = [
-            'period' => $period, 'params' => $params
+            'period' => $period, 'params' => $params,
         ];
 
         return (new Orders())->make($domain, 'Renew_Domain', $body);
