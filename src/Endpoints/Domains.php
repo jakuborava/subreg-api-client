@@ -5,6 +5,7 @@ namespace Jakuborava\SubregApiClient\Endpoints;
 use Illuminate\Support\Collection;
 use Jakuborava\SubregApiClient\DataTransferObjects\Domain;
 use Jakuborava\SubregApiClient\DataTransferObjects\DomainMinimal;
+use Jakuborava\SubregApiClient\DataTransferObjects\Host;
 use Jakuborava\SubregApiClient\Exceptions\LoginFailedException;
 use Jakuborava\SubregApiClient\Exceptions\RequestFailedException;
 use Jakuborava\SubregApiClient\Responses\DomainCheckResponse;
@@ -120,5 +121,28 @@ class Domains
 
                 return ($a->expire->gt($b->expire)) ? 1 : -1;
             })->values();
+    }
+
+    /**
+     * @param Collection<Host> $hosts
+     * @throws LoginFailedException
+     * @throws RequestFailedException
+     */
+    public function modifyNsUsingHostnames(string $domain, Collection $hosts): int
+    {
+        $body = ['ns' => ['hosts' => $hosts->map(fn(Host $host) => $host->toArray())->toArray()]];
+
+        return (new Orders())->make($domain, 'ModifyNS_Domain', $body);
+    }
+
+    /**
+     * @throws LoginFailedException
+     * @throws RequestFailedException
+     */
+    public function modifyNsUsingNsset(string $domain, string $nsset): int
+    {
+        $body = ['ns' => ['nsset' => $nsset]];
+
+        return (new Orders())->make($domain, 'ModifyNS_Domain', $body);
     }
 }
