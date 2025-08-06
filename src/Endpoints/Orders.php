@@ -17,7 +17,7 @@ class Orders
     {
         $params = ['data' => ['order' => ['domain' => $domain, 'type' => $type, 'params' => $orderParams]]];
 
-        $response = (new SubregRequest())->call('Make_Order', $params);
+        $response = (new SubregRequest)->call('Make_Order', $params);
 
         return $response['data']['orderid'];
     }
@@ -28,7 +28,7 @@ class Orders
      */
     public function info(int $orderID): OrderResponse
     {
-        $response = (new SubregRequest())->call('Info_Order', ['data' => ['order' => $orderID]]);
+        $response = (new SubregRequest)->call('Info_Order', ['data' => ['order' => $orderID]]);
 
         return OrderResponse::fromSubregAPIResponse($response['data']['order']);
     }

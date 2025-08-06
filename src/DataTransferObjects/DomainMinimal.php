@@ -11,8 +11,7 @@ class DomainMinimal implements DTO
         public readonly string $name,
         public readonly Carbon $expire,
         public readonly bool $autoRenew
-    ) {
-    }
+    ) {}
 
     public static function fromSubregAPIResponse(array $data): DomainMinimal
     {

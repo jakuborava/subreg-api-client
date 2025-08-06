@@ -16,8 +16,7 @@ class OrderResponse
         public readonly string $message,
         public readonly bool $payed,
         public readonly float $amount,
-    ) {
-    }
+    ) {}
 
     public static function fromSubregAPIResponse(array $responseData): OrderResponse
     {

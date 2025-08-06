@@ -16,7 +16,7 @@ class DNS
      */
     public function list(string $domain): Collection
     {
-        $response = (new SubregRequest())->call('Get_DNS_Zone', ['data' => ['domain' => $domain]]);
+        $response = (new SubregRequest)->call('Get_DNS_Zone', ['data' => ['domain' => $domain]]);
 
         return collect($response['data']['records'])->map(function (array $record) {
             return DNSRecord::fromSubregAPIResponse($record);
@@ -48,7 +48,7 @@ class DNS
             ],
         ];
 
-        $response = (new SubregRequest())->call('Add_DNS_Record', $params);
+        $response = (new SubregRequest)->call('Add_DNS_Record', $params);
 
         return $response['data']['record_id'];
     }
@@ -78,7 +78,7 @@ class DNS
             ],
         ];
 
-        (new SubregRequest())->call('Modify_DNS_Record', $params);
+        (new SubregRequest)->call('Modify_DNS_Record', $params);
     }
 
     /**
@@ -96,7 +96,7 @@ class DNS
             ],
         ];
 
-        (new SubregRequest())->call('Delete_DNS_Record', $params);
+        (new SubregRequest)->call('Delete_DNS_Record', $params);
     }
 
     /**
@@ -112,6 +112,6 @@ class DNS
             ],
         ];
 
-        (new SubregRequest())->call('Add_DNS_Zone', $params);
+        (new SubregRequest)->call('Add_DNS_Zone', $params);
     }
 }

@@ -15,7 +15,7 @@ class Credit
      */
     public function info(): CreditResponse
     {
-        $response = (new SubregRequest())->call('Get_Credit', []);
+        $response = (new SubregRequest)->call('Get_Credit', []);
 
         return CreditResponse::fromSubregAPIResponse($response['data']['credit']);
     }

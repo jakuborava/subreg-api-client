@@ -11,21 +11,21 @@ class SubregApiClient
 {
     public function domains(): Domains
     {
-        return new Domains();
+        return new Domains;
     }
 
     public function credit(): Credit
     {
-        return new Credit();
+        return new Credit;
     }
 
     public function dns(): DNS
     {
-        return new DNS();
+        return new DNS;
     }
 
     public function orders(): Orders
     {
-        return new Orders();
+        return new Orders;
     }
 }

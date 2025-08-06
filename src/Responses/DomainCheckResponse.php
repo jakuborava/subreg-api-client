@@ -13,8 +13,7 @@ class DomainCheckResponse
         public readonly Price $priceRenew,
         public readonly Price $priceTransfer,
         public readonly string $existingClaimID
-    ) {
-    }
+    ) {}
 
     public static function fromSubregAPIResponse(array $responseData): DomainCheckResponse
     {
