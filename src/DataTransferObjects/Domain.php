@@ -27,10 +27,9 @@ class Domain extends DomainMinimal
 
     public static function fromSubregAPIResponse(array $data): Domain
     {
-        //dd($data);
         return new Domain(
             $data['domain'],
-            $data['contacts'],
+            $data['contacts'] ?? [],
             $data['hosts'],
             $data['delegated_hosts'] ?? [],
             $data['registrant'],
