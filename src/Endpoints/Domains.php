@@ -21,7 +21,7 @@ class Domains
      */
     public function list(): Collection
     {
-        $response = (new SubregRequest())->call('Domains_List', []);
+        $response = (new SubregRequest)->call('Domains_List', []);
 
         return collect($response['data']['domains'])->map(function (array $domain) {
             return DomainMinimal::fromSubregAPIResponse($domain);
@@ -40,7 +40,7 @@ class Domains
             ],
         ];
 
-        $response = (new SubregRequest())->call('Info_Domain', $params);
+        $response = (new SubregRequest)->call('Info_Domain', $params);
 
         return Domain::fromSubregAPIResponse($response['data']);
     }
@@ -57,7 +57,7 @@ class Domains
             ],
         ];
 
-        $response = (new SubregRequest())->call('Check_Domain', $params);
+        $response = (new SubregRequest)->call('Check_Domain', $params);
 
         return DomainCheckResponse::fromSubregAPIResponse($response['data']);
     }
@@ -88,7 +88,7 @@ class Domains
 
         $body['params'] = $params;
 
-        return (new Orders())->make($domain, 'Create_Domain', $body);
+        return (new Orders)->make($domain, 'Create_Domain', $body);
     }
 
     /**
@@ -103,7 +103,7 @@ class Domains
             'period' => $period, 'params' => $params,
         ];
 
-        return (new Orders())->make($domain, 'Renew_Domain', $body);
+        return (new Orders)->make($domain, 'Renew_Domain', $body);
     }
 
     /**
@@ -124,15 +124,16 @@ class Domains
     }
 
     /**
-     * @param Collection<Host> $hosts
+     * @param  Collection<Host>  $hosts
+     *
      * @throws LoginFailedException
      * @throws RequestFailedException
      */
     public function modifyNsUsingHostnames(string $domain, Collection $hosts): int
     {
-        $body = ['ns' => ['hosts' => $hosts->map(fn(Host $host) => $host->toArray())->toArray()]];
+        $body = ['ns' => ['hosts' => $hosts->map(fn (Host $host) => $host->toArray())->toArray()]];
 
-        return (new Orders())->make($domain, 'ModifyNS_Domain', $body);
+        return (new Orders)->make($domain, 'ModifyNS_Domain', $body);
     }
 
     /**
@@ -143,6 +144,6 @@ class Domains
     {
         $body = ['ns' => ['nsset' => $nsset]];
 
-        return (new Orders())->make($domain, 'ModifyNS_Domain', $body);
+        return (new Orders)->make($domain, 'ModifyNS_Domain', $body);
     }
 }

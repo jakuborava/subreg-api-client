@@ -4,6 +4,4 @@ namespace Jakuborava\SubregApiClient\Exceptions;
 
 use Exception;
 
-class RequestFailedException extends Exception
-{
-}
+class RequestFailedException extends Exception {}

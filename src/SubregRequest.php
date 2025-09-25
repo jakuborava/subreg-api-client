@@ -22,7 +22,7 @@ class SubregRequest
         ];
 
         try {
-            $response = (new self())->call('Login', $params);
+            $response = (new self)->call('Login', $params);
         } catch (LoginFailedException|RequestFailedException|SoapFault $e) {
             throw new LoginFailedException(
                 'It was not possible to login to Subreg API. Exception: '.$e->getMessage()

@@ -10,8 +10,7 @@ class Price implements DTO
         public readonly float $amount,
         public readonly bool $premium,
         public readonly string $currency
-    ) {
-    }
+    ) {}
 
     public static function fromSubregAPIResponse(array $data): Price
     {

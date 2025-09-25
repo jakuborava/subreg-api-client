@@ -13,8 +13,7 @@ class DNSRecord implements DTO
         public readonly string $content,
         public readonly int $priority,
         public readonly int $ttl
-    ) {
-    }
+    ) {}
 
     public static function fromSubregAPIResponse(array $data): DNSRecord
     {
