@@ -113,7 +113,7 @@ class Domains
     public function expiringIn(int $days): Collection
     {
         return $this->list()
-            ->filter(fn (DomainMinimal $domain) => $domain->expire->diffInDays(now()) <= $days)
+            ->filter(fn (DomainMinimal $domain) => $domain->expire->diffInDays(now(), true) <= $days)
             ->sort(function (DomainMinimal $a, DomainMinimal $b) {
                 if ($a->expire->eq($b->expire)) {
                     return 0;
