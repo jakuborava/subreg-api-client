@@ -12,17 +12,16 @@ readonly class OrderHistoryEntry
         public int $orderId,
         public float $sum,
         public float $credit
-    ) {
-    }
+    ) {}
 
     public static function fromSubregAPIResponse(array $data): OrderHistoryEntry
     {
         return new OrderHistoryEntry(
             CarbonImmutable::parse($data['date']),
             $data['text'],
-            (int)$data['order'],
-            (float)$data['sum'],
-            (float)$data['credit']
+            (int) $data['order'],
+            (float) $data['sum'],
+            (float) $data['credit']
         );
     }
 }

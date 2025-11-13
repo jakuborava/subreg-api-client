@@ -38,6 +38,7 @@ class Orders
 
     /**
      * @return Collection<int, OrderHistoryEntry>
+     *
      * @throws LoginFailedException
      * @throws RequestFailedException
      */
@@ -46,6 +47,6 @@ class Orders
         $response = (new SubregRequest)->call('Get_Accountings', ['data' => ['from' => $from, 'to' => $to]]);
 
         return (new Collection($response['data']['accounting']))
-            ->map(fn(array $order) => OrderHistoryEntry::fromSubregAPIResponse($order));
+            ->map(fn (array $order) => OrderHistoryEntry::fromSubregAPIResponse($order));
     }
 }
