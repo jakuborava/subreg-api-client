@@ -41,12 +41,9 @@ class Orders
      * @throws LoginFailedException
      * @throws RequestFailedException
      */
-    public function history(CarbonImmutable $from, CarbonImmutable $to): Collection
+    public function history(string $from, string $to): Collection
     {
-        $response = (new SubregRequest)->call(
-            'Get_Accountings',
-            ['data' => ['from' => $from->format('Y-m-d'), 'to' => $to->format('Y-m-d')]]
-        );
+        $response = (new SubregRequest)->call('Get_Accountings', ['data' => ['from' => $from, 'to' => $to]]);
 
         return (new Collection($response['data']['accounting']))
             ->map(fn(array $order) => OrderHistoryEntry::fromSubregAPIResponse($order));
