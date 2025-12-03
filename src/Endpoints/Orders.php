@@ -2,7 +2,6 @@
 
 namespace Jakuborava\SubregApiClient\Endpoints;
 
-use Carbon\CarbonImmutable;
 use Illuminate\Support\Collection;
 use Jakuborava\SubregApiClient\DataTransferObjects\OrderHistoryEntry;
 use Jakuborava\SubregApiClient\Exceptions\LoginFailedException;
